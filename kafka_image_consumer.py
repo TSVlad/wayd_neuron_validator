@@ -24,7 +24,7 @@ def handle_new_image(message):
     print("<New image> message handle")
     img = images_utils.get_image_from_bytes(message.value['image'])
     res = neiron_validator.validate_image(img)
-    message = create_neuron_validator_message('IMAGE_VALIDATED', message.value['imageId'], 'VALID' if res < 0.5 else 'NOT_VALID')
+    message = create_neuron_validator_message('IMAGE_VALIDATED', message.value['imageDTO']['id'], 'VALID' if res < 0.5 else 'NOT_VALID')
     kafka_producer.send(message)
 
 
